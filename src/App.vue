@@ -1,12 +1,12 @@
 vue <template>
   <div>
+    <h3 class="text-center mt-5">Ingresa un titulo para el gatito y presiona 'enter'</h3>
     <div class="container">
-      <h3 class="text-center mt-5">Ingresa un mensaje en el campo de texto y presiona 'enter'</h3>
       <div class="input-wrap">
-        <input class="mt-3" type="text" placeholder="mensaje" v-model="mensaje" />
+        <input class="mt-3" type="text" placeholder="titulo" v-model="mensaje" />
         <p>
           Filtro
-          <select v-model="filterSlected">
+          <select v-model="filterSelected">
             <option disabled selected>Seleccione:</option>
             <option
               @click="filterSelected = item"
@@ -19,7 +19,25 @@ vue <template>
 
         <p>
           Color
-          <select name="color" id></select>
+          <select v-model="colorSelected">
+            <option disabled selected>Selecciona:</option>
+            <option
+              @click="colorSelecteed = item"
+              v-for="item in colors"
+              :key="item.id"
+              :value="item"
+            >{{item}}</option>
+          </select>
+        </p>
+        <div :style="{ 'background-color': this.colorSelected}"
+        class="color-round"
+        >
+
+        </div>
+
+        <p>
+          Tamaño:
+          <input type="number" v-model.number="size" min="1" />
         </p>
       </div>
       <!-- <button>buscar mininos</button> -->
@@ -34,21 +52,41 @@ export default {
   data() {
     return {
       filter: ["blur", "mono", "sepia", "negative", "paint", "pixel"],
-      color: ["red", "green", "yellow", "blue", "black", "gray"],
+      colors: ["red", "green", "yellow", "blue", "black", "gray"],
       filterSelected: "Selecciona:",
+      colorSelected: "Selecciones",
+      size: null,
       mensaje: "",
     };
   },
   computed: {
     gatito() {
-      return `https://cataas.com/cat/says/${this.mensaje}?filter=${this.filterSelected}`;
+      return `https://cataas.com/cat/says/${this.mensaje}?filter=${this.filterSelected}&color=${this.colorSelected}&size=${this.size}`;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+
+.container {
+  background-color: pink;
+  margin: 2rem auto;
+  padding: 1rem;
+}
 p {
   margin: 1rem 0;
 }
-</style>
+img {
+  border-radius: 50%;
+  margin: 1rem 0 0 20rem;
+}
+color-round{
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  margin-left: 2rem;;
+}
+</style> 
+
+// no funciona el input para el tamaño ni el round color :( sorry
