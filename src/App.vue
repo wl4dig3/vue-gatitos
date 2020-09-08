@@ -19,7 +19,7 @@ vue <template>
                     <option @click="colorSelected = item" v-for="item in colors" :key="item.id" :value="item">{{item}}</option>
                 </select>
             </p>
-            <span></span>
+
             <span class="colorRound" :style="{ backgroundColor: this.colorSelected}">
                 {{colorSelected}}
             </span>
@@ -43,7 +43,7 @@ export default {
             filter: ["blur", "mono", "sepia", "negative", "paint", "pixel"],
             colors: ["red", "green", "yellow", "blue", "black", "gray"],
             filterSelected: "Selecciona un filtro:",
-            colorSelected: " ",
+            colorSelected: "",
             // size: null,
             mensaje: "",
         };
@@ -72,7 +72,7 @@ img {
     margin: 1rem 0 0 20rem;
 }
 
-colorRound {
+.colorRound {
 
     border: 1px solid;
     border-radius: 50%;
@@ -81,6 +81,4 @@ colorRound {
     margin-left: 2rem;
     background-color: black;
 }
-</style> 
-
-// no funciona el input para el tamaño ni el round color :( sorry
+</style>
