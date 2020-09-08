@@ -16,12 +16,13 @@ vue <template>
                 Color
                 <select v-model="colorSelected">
                     <option disabled selected>Selecciona:</option>
-                    <option @click="colorSelecteed = item" v-for="item in colors" :key="item.id" :value="item">{{item}}</option>
+                    <option @click="colorSelected = item" v-for="item in colors" :key="item.id" :value="item">{{item}}</option>
                 </select>
             </p>
-            <div class="colorRound" :style="{ 'backgroundColor': this.colorSelected}">
-
-            </div>
+            <span></span>
+            <span class="colorRound" :style="{ backgroundColor: this.colorSelected}">
+                {{colorSelected}}
+            </span>
 
             <p>
                 Tamaño:
@@ -42,7 +43,7 @@ export default {
             filter: ["blur", "mono", "sepia", "negative", "paint", "pixel"],
             colors: ["red", "green", "yellow", "blue", "black", "gray"],
             filterSelected: "Selecciona un filtro:",
-            colorSelected: "Selecciona un color",
+            colorSelected: " ",
             // size: null,
             mensaje: "",
         };
@@ -72,11 +73,13 @@ img {
 }
 
 colorRound {
+
+    border: 1px solid;
     border-radius: 50%;
     width: 2rem;
     height: 2rem;
     margin-left: 2rem;
-
+    background-color: black;
 }
 </style> 
 
